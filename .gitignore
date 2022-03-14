@@ -1,0 +1,36 @@
+# VSCode 
+.vscode
+*.code-workspace
+
+# Cache Python
+*.pyc
+system/**/__pycache__/*.*
+
+# Enviorementes
+.venv/
+#.env
+
+# Keys Enviorementes
+# system/.env
+
+# Apps Tests
+system/apps/books/
+system/apps/ubigeos/
+
+# Database Local
+system/config/*.sqlite3
+
+# Media Files
+system/media/
+
+# Static Files
+# system/apps/core/templates
+# system/static/
+system/staticfiles/
+
+# Migrations from Applications
+system/apps/**/migrations/*.*
+!system/apps/**/migrations/__init__.py
+
+# Fixtures from Applications
+system/apps/**/fixtures/*.*
