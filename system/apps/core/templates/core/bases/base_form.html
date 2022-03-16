@@ -1,0 +1,97 @@
+{% extends "core/base_site.html" %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>{{ title }}</h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <p>Campos obligatorios (*)</p>
+                    </div>
+                    <div class="x_content">
+
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                                data-dashlane-label="true" data-dashlane-rid="615159ebe31f2cf2" data-form-type=""><span
+                                    aria-hidden="true">×</span>
+                            </button>
+                            {% for error in form.non_field_errors %}
+                            <p>
+                                <strong>Aviso!</strong> {{ error }}.
+                            </p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <form class="form-horizontal form-label-left" method="post" action="." enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            {% with WIDGET_ERROR_CLASS='is-invalid' %}
+                            {% for field in form %}
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                    for="{{ field.id_for_label }}">{{ field.label }}
+                                    {% if field.field.required %}<span class="required">*</span>{% endif %}
+                                </label>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    {% render_field field|add_class:"form-control col-md-7 col-xs-12" %}
+                                    {% include 'core/includes/form-errors.html' %}
+
+                                </div>
+                            </div>
+
+                            {% endfor %}
+                            {% endwith %}
+
+                            <div class="form-group text-center">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+
+                                    {% if object %}
+                                    <button type="submit" class="btn btn-round btn-warning">
+                                        <i class="fa fa-save"></i> Actualizar
+                                    </button>
+
+                                    <button type="submit" class="btn btn-round btn-primary" name="add_another">
+                                        <i class="fa fa-save"></i> Guardar como nuevo
+                                    </button>
+
+
+                                    {% else %}
+
+                                    <button type="submit" class="btn btn-round btn-primary" name="add_another">
+                                        <i class="fa fa-save"></i> Guardar y añadir otro
+                                    </button>
+
+                                    <button type="submit" class="btn btn-round btn-success" name="add">
+                                        <i class="fa fa-save"></i> Guardar
+                                    </button>
+
+                                    {% endif %}
+
+                                    <a href="{{ url_list }}" class="btn btn-round btn-dark">
+                                        <i class="fa fa-reply" aria-hidden="true"></i> Retornar
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

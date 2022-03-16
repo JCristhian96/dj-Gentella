@@ -1,0 +1,15 @@
+<script>
+
+    {% if messages %}
+    {% for message in messages %}
+        iziToast.info({
+            title: 'Aviso!',
+            message: "{{ message }}",
+            color: '{{ message.tags }}', // blue, red, green, yellow
+            position: 'bottomCenter', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter, center
+            timeout: 3000,
+        });
+
+    {% endfor %}
+    {% endif %}
+</script>

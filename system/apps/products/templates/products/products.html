@@ -1,0 +1,58 @@
+{% extends "core/bases/base_list.html" %}
+
+{% load widget_tweaks %}
+{% load products_extras %}
+
+{% block title %} Listado de Productos {% endblock title %}
+
+{% block thead %}
+    <tr>
+        <th scope="col" style="width: 5%;">#</th>
+        <th scope="col" style="width: 30%;">Titulo</th>
+        <th scope="col" style="width: 20%;">SubCategoria</th>
+        <th scope="col" style="width: 5%;">U/M</th>
+        <th scope="col" style="width: 5%;">Precio</th>
+        <th scope="col" style="width: 5%;">Stock</th>
+        <th scope="col" style="width: 5%;">Estado</th>
+        <th scope="col" style="width: 10%;">Acciones</th>
+    </tr>
+{% endblock thead %}
+
+{% block tbody %}
+    {% for object in object_list %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>
+            <a href="{% url 'products:product_update' object.slug  %}">
+                {{ object.title }} (<i>{{ object.model }}</i>) - <span class="label label-default">{{ object.mark.title }}</span>
+            </a>
+            <br>
+            <small>{{ object.detail }}</small>
+        </td>
+        <td>{{ object.subcategory }}</td>
+        <td>{{ object.umedida }}</td>
+        <td>{{ object.price | price_format }}</td>
+        
+        <td>
+            <strong {% if object.stock <= 0 %}class="text-danger"{% endif %}>{{ object.stock }}</strong>    
+        </td>
+        <td>
+            {% if object.active %}
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+            {% else %}
+            <strong class="text-danger">Inactivo</strong>
+            {% endif %}
+        </td>
+        <td>
+            <a href="{% url 'products:product_update' object.slug %}" class="btn btn-sm btn-warning">
+                <i class="fa fa-edit"></i> Editar
+            </a>
+
+            {% block state %}
+            {{ block.super }}
+            {% endblock state %}
+
+        </td>
+    </tr>
+    {% endfor %}
+{% endblock tbody %}

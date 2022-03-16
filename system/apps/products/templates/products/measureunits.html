@@ -1,0 +1,42 @@
+{% extends "core/bases/base_list.html" %}
+
+{% load widget_tweaks %}
+
+{% block title %} Listado de Unidades de Medida {% endblock title %}
+
+{% block thead %}
+    <tr>
+        <th scope="col" style="width: 5%;">#</th>
+        <th scope="col" style="width: 60%;">Titulo</th>
+        <th scope="col" style="width: 10%;"># Productos</th>
+        <th scope="col" style="width: 10%;">Estado</th>
+        <th scope="col" style="width: 25%;">Acciones</th>
+    </tr>
+{% endblock thead %}
+
+{% block tbody %}
+    {% for object in object_list %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ object.title }}</td>
+        <td>{{ object.count }}</td>
+        <td>
+            {% if object.active %}
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+            {% else %}
+            <strong class="text-danger">Inactivo</strong>
+            {% endif %}
+        </td>
+        <td>
+            <a href="{% url 'products:measureunit_update' object.slug %}" class="btn btn-sm btn-warning">
+                <i class="fa fa-edit"></i> Editar
+            </a>
+            
+            {% block state %}
+            {{ block.super }}
+            {% endblock state %}
+
+        </td>
+    </tr>
+    {% endfor %}
+{% endblock tbody %}

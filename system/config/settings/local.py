@@ -1,11 +1,16 @@
 from .base import *
-from . import db
+from . import db, dev
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+
+# DEV CONFIG: Imports settings of Dev Packages
+dev.load_setting_devs(INSTALLED_APPS, MIDDLEWARE)
+INTERNAL_IPS = dev.set_internal_ips()
 
 
 # Database

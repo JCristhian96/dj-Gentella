@@ -1,0 +1,10 @@
+{% if form.non_field_errors %}
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" data-dashlane-rid="7a0f3bccd33e2f7c"
+        data-dashlane-label="true" data-form-type=""><span aria-hidden="true">×</span>
+    </button>
+    {% for error in form.non_field_errors %}
+    <strong>Aviso!</strong> {{ error }}
+    {% endfor %}
+</div>
+{% endif %}

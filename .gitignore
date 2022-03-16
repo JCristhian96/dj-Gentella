@@ -8,10 +8,9 @@ system/**/__pycache__/*.*
 
 # Enviorementes
 .venv/
-#.env
 
 # Keys Enviorementes
-# system/.env
+system/.env
 
 # Apps Tests
 system/apps/books/

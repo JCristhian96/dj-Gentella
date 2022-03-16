@@ -1,12 +1,12 @@
 import os
 from unipath import Path
 from dotenv import load_dotenv
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).ancestor(3)
 # Secret Keys
 load_dotenv(BASE_DIR.child(".env"))
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,9 +29,13 @@ DJANGO_APPS = (
 
 LOCAL_APPS = (
     'apps.core',
+    'apps.users',
+    'apps.products',
 )
 
-THRID_PARTY_APPS = ()
+THRID_PARTY_APPS = (
+    'widget_tweaks',    # Add Class to Forms
+)
 
 INSTALLED_APPS = list(DJANGO_APPS + LOCAL_APPS + THRID_PARTY_APPS)
 
@@ -105,3 +109,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Model for User
+AUTH_USER_MODEL = 'users.User'
+
+# URLs Authentitacion
+LOGIN_URL = reverse_lazy('users:login')
+#LOGOUT_URL = reverse_lazy('users:logout')
+
+# Messages Tags
+from django.contrib import messages
+MESSAGE_TAGS = { 
+    messages.SUCCESS: 'green',
+    messages.ERROR: 'red',
+    messages.INFO: 'blue',
+    messages.WARNING: 'yellow'
+}
+# blue, red, green, yellow
