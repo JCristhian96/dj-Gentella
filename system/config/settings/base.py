@@ -1,7 +1,10 @@
 import os
+from django.contrib import messages
+from django.urls import reverse_lazy
+# Terceros
 from unipath import Path
 from dotenv import load_dotenv
-from django.urls import reverse_lazy
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).ancestor(3)
@@ -35,6 +38,7 @@ LOCAL_APPS = (
 
 THRID_PARTY_APPS = (
     'widget_tweaks',    # Add Class to Forms
+    'easy_thumbnails',  # Thumbnails
 )
 
 INSTALLED_APPS = list(DJANGO_APPS + LOCAL_APPS + THRID_PARTY_APPS)
@@ -113,16 +117,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Model for User
 AUTH_USER_MODEL = 'users.User'
 
-# URLs Authentitacion
-LOGIN_URL = reverse_lazy('users:login')
-#LOGOUT_URL = reverse_lazy('users:logout')
 
-# Messages Tags
-from django.contrib import messages
+# URLs Login
+LOGIN_URL = reverse_lazy('users:login')
+LOGOUT_REDIRECT_URL = reverse_lazy("users:login")
+LOGIN_REDIRECT_URL = reverse_lazy('index')
+
+
+# Change class of messages (Tags)
 MESSAGE_TAGS = { 
     messages.SUCCESS: 'green',
     messages.ERROR: 'red',
     messages.INFO: 'blue',
     messages.WARNING: 'yellow'
+}# blue, red, green, yellow
+
+
+# Thumbnails Config
+THUMBNAIL_ALIASES = {
+    '': {
+        'thumbnail': {'size': (60, 60), 'crop': 'smart'},
+        'thumbnail_mark': {'size': (90, 60), 'crop': 'smart'},
+        #'avatar': {'size': (50, 50), 'crop': True},
+    },
 }
-# blue, red, green, yellow

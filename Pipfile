@@ -11,6 +11,7 @@ django-widget-tweaks = "*"
 pillow = "*"
 psycopg2-binary = "*"
 gunicorn = "*"
+easy-thumbnails = "*"
 
 [dev-packages]
 django-extensions = "*"

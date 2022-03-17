@@ -1,6 +1,8 @@
 {% extends "core/bases/base_list.html" %}
 
+{% load thumbnail %}
 {% load widget_tweaks %}
+
 
 {% block title %} Listado de Marcas {% endblock title %}
 
@@ -20,7 +22,12 @@
     <tr>
         <td>{{ forloop.counter }}</td>
         <td>{{ object.title }}</td>
-        <td>{{ object.image }}</td>
+        <td class="text-center">
+            {% if object.image %}            
+            <img src="{{ object.image.thumbnail_mark.url }}" alt="Imagen de la marca {{ object.title }}" />
+            {% endif %}
+        
+        </td>
         <td>{{ object.count }}</td>
         <td>
             {% if object.active %}
@@ -31,7 +38,7 @@
         </td>
         <td>
             <a href="{% url 'products:mark_update' object.slug %}" class="btn btn-sm btn-warning">
-                <i class="fa fa-edit"></i> Editar
+                <i class="fa fa-edit"></i> Edit
             </a>
 
             {% block state %}

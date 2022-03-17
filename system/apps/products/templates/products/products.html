@@ -8,8 +8,9 @@
 {% block thead %}
     <tr>
         <th scope="col" style="width: 5%;">#</th>
-        <th scope="col" style="width: 30%;">Titulo</th>
+        <th scope="col" style="width: 25%;">Titulo</th>
         <th scope="col" style="width: 20%;">SubCategoria</th>
+        <th scope="col" style="width: 10%;">Imagen</th>
         <th scope="col" style="width: 5%;">U/M</th>
         <th scope="col" style="width: 5%;">Precio</th>
         <th scope="col" style="width: 5%;">Stock</th>
@@ -30,6 +31,11 @@
             <small>{{ object.detail }}</small>
         </td>
         <td>{{ object.subcategory }}</td>
+        <td class="text-center">
+            {% if object.image %}
+                <img src="{{ object.image.thumbnail.url }}" alt="Imagen de Produto {{ object.title }}">  
+            {% endif %}
+        </td>
         <td>{{ object.umedida }}</td>
         <td>{{ object.price | price_format }}</td>
         
@@ -45,7 +51,7 @@
         </td>
         <td>
             <a href="{% url 'products:product_update' object.slug %}" class="btn btn-sm btn-warning">
-                <i class="fa fa-edit"></i> Editar
+                <i class="fa fa-edit"></i> Edit
             </a>
 
             {% block state %}

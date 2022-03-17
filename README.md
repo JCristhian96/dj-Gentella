@@ -15,6 +15,7 @@ Creacion de modelos y su respecto CRUD para los modelos:
 
 (Observaciones):
 
-- Los objetos no pueden ser borrados solo inactivados, con un solo View.
-- Todo el CRUD de los modelos esta basada en Views heredadas de 'core/views.py'
-- La autenticacion esta realizandose a travez de los correos (Login, Logout, CreateUser)
+- Los objetos no pueden ser borrados solo inactivados, con un solo View..
+- Todo el CRUD de los modelos esta basada en Views heredadas de 'core/views.py'.
+- La autenticacion esta realizandose a travez de los correos (Login, Logout, CreateUser).
+- Intregracion de Easy Thumbnail para la genereacion de miniaturas.
